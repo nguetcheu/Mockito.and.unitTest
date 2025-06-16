@@ -9,13 +9,15 @@ import static org.mockito.Mockito.when;
 
 public class SomeBusinessMockTest {
 
+    SomeBusinessImpl business = new SomeBusinessImpl();
+    // Création du mock de la classe service
+    SomeDataService dataServiceMock = mock(SomeDataService.class);
+
     @Test
     public void calculateSumUsingDataService_Basic() {
-        SomeBusinessImpl business = new SomeBusinessImpl();
-
-        SomeDataService dataServiceMock = mock(SomeDataService.class);
         when(dataServiceMock.retrieveAllData()).thenReturn(new int[] {1,2,3});
 
+        // Liaison du resultat du mock avec le service utilisé dans notre classe implémentation du business
         business.setSomeDatService(dataServiceMock);
 
         int actualResult = business.calculateSumUsingDataService();
@@ -25,10 +27,6 @@ public class SomeBusinessMockTest {
 
     @Test
     public void calculateSumUsingDataService_empty() {
-        SomeBusinessImpl business = new SomeBusinessImpl();
-
-        // Création du mock
-        SomeDataService dataServiceMock = mock(SomeDataService.class);
         when(dataServiceMock.retrieveAllData()).thenReturn(new int[] {});
 
         // Liaison du resultat du mock avec le service utilisé dans notre classe implémentation du business
@@ -37,14 +35,10 @@ public class SomeBusinessMockTest {
         int actualResult = business.calculateSumUsingDataService();
         int expectedResult = 0;
         assertEquals(expectedResult, actualResult);
-
     }
 
     @Test
     public void calculateSumUsingDataService_oneValue() {
-        SomeBusinessImpl business = new SomeBusinessImpl();
-        // Création du mock
-        SomeDataService dataServiceMock = mock(SomeDataService.class);
         when(dataServiceMock.retrieveAllData()).thenReturn(new int[] {1});
 
         // Liaison du resultat du mock avec le service utilisé dans notre classe implémentation du business
