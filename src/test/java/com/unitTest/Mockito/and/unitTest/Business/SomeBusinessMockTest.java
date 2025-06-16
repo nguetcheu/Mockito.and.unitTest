@@ -1,24 +1,21 @@
 package com.unitTest.Mockito.and.unitTest.Business;
 import com.unitTest.Mockito.and.unitTest.Data.SomeDataService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
+@ExtendWith(MockitoExtension.class)
 public class SomeBusinessMockTest {
-
+    @InjectMocks
     SomeBusinessImpl business = new SomeBusinessImpl();
-    // Création du mock de la classe service
-    SomeDataService dataServiceMock = mock(SomeDataService.class);
 
-    // Liaison du resultat du mock avec le service utilisé dans notre classe implémentation du business
-    @BeforeEach
-    public void before() {
-        business.setSomeDatService(dataServiceMock);
-    }
+    @Mock
+    SomeDataService dataServiceMock;
 
 
     @Test
